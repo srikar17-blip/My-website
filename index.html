@@ -1,39 +1,53 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Game 🎮</title>
-    <style>
-        body {
-            text-align: center;
-            font-family: Arial;
-            background-color: #222;
-            color: white;
-        }
-        button {
-            padding: 20px;
-            font-size: 20px;
-            background-color: orange;
-            border: none;
-            border-radius: 10px;
-        }
-    </style>
+  <title>My Game</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial;
+      background-color: lightblue;
+    }
+
+    h1 {
+      color: darkblue;
+    }
+
+    #box {
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      position: absolute;
+      top: 200px;
+      left: 200px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 
 <body>
 
-<h1>🎮 Click Game</h1>
-<p>Score: <span id="score">0</span></p>
+  <h1>🎮 Click the Box Game</h1>
+  <h2>Score: <span id="score">0</span></h2>
 
-<button onclick="increaseScore()">Click Me!</button>
+  <div id="box"></div>
 
-<script>
+  <script>
     let score = 0;
+    let box = document.getElementById("box");
 
-    function increaseScore() {
-        score++;
-        document.getElementById("score").innerText = score;
-    }
-</script>
+    box.onclick = function() {
+      score++;
+      document.getElementById("score").innerText = score;
+
+      // Move box randomly
+      let x = Math.random() * 300;
+      let y = Math.random() * 300;
+
+      box.style.left = x + "px";
+      box.style.top = y + "px";
+    };
+  </script>
 
 </body>
 </html>
