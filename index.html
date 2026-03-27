@@ -1,53 +1,62 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html><html lang="en">
 <head>
-  <title>My Game</title>
+  <meta charset="UTF-8">
+  <title>Mini Cricket Game</title>
   <style>
     body {
-      text-align: center;
       font-family: Arial;
-      background-color: lightblue;
+      text-align: center;
+      background: #0b6623;
+      color: white;
     }
-
-    h1 {
-      color: darkblue;
+    #game {
+      margin-top: 50px;
     }
-
-    #box {
-      width: 100px;
-      height: 100px;
-      background-color: red;
-      position: absolute;
-      top: 200px;
-      left: 200px;
+    button {
+      padding: 10px 20px;
+      margin: 5px;
+      font-size: 16px;
       cursor: pointer;
+    }
+    #score {
+      font-size: 24px;
+      margin-top: 20px;
     }
   </style>
 </head>
+<body><h1>🏏 Mini Cricket Game</h1>
+<p>Click a shot and try to score runs!</p><div id="game">
+  <button onclick="playShot(1)">1 Run</button>
+  <button onclick="playShot(2)">2 Runs</button>
+  <button onclick="playShot(4)">4 Runs</button>
+  <button onclick="playShot(6)">6 Runs</button>
+</div><div id="score">Score: 0 | Balls: 0</div>
+<div id="result"></div><script>
+  let score = 0;
+  let balls = 0;
 
-<body>
+  function playShot(run) {
+    if (balls >= 6) {
+      document.getElementById("result").innerText = "Over finished! Final Score: " + score;
+      return;
+    }
 
-  <h1>🎮 Click the Box Game</h1>
-  <h2>Score: <span id="score">0</span></h2>
+    let chance = Math.random();
+    balls++;
 
-  <div id="box"></div>
+    if (chance < 0.2) {
+      document.getElementById("result").innerText = "OUT!";
+      balls = 6;
+    } else {
+      score += run;
+      document.getElementById("result").innerText = "You scored " + run + " run(s)!";
+    }
 
-  <script>
-    let score = 0;
-    let box = document.getElementById("box");
+    document.getElementById("score").innerText = "Score: " + score + " | Balls: " + balls;
 
-    box.onclick = function() {
-      score++;
-      document.getElementById("score").innerText = score;
-
-      // Move box randomly
-      let x = Math.random() * 300;
-      let y = Math.random() * 300;
-
-      box.style.left = x + "px";
-      box.style.top = y + "px";
-    };
-  </script>
-
-</body>
+    if (balls === 6) {
+      document.getElementById("result").innerText += " | Over finished! Final Score: " + score;
+    }
+  }
+</script></body>
 </html>
